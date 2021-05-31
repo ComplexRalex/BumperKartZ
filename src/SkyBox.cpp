@@ -2,9 +2,10 @@
 
 SkyBox::SkyBox()
 {
-    x = y = z = 0;
+    x = z = 0;
+    y = 1;
 
-    texFilename = "res/space.bmp";
+    tex.loadTexture("res/space.bmp");
 
     points[0][0] =  SKYBOX_RAD; points[0][1] =  SKYBOX_RAD;
     points[1][0] = -SKYBOX_RAD; points[1][1] =  SKYBOX_RAD;
@@ -28,7 +29,7 @@ float SkyBox::getRadious(){ return SKYBOX_RAD; }
 
 void SkyBox::draw()
 {
-    tex.loadTexture(texFilename);
+    tex.bind();
 
     glDepthMask(GL_FALSE);
     glEnable(GL_TEXTURE_2D);
@@ -37,7 +38,6 @@ void SkyBox::draw()
     glTranslatef(x,y,z);
     glColor3f(1.0f,1.0f,1.0f);
     glBegin(GL_QUAD_STRIP);
-        tex.bind();
         for(int i = 0; i < 5; i++)
         {
             glTexCoord2f(0.0f+i,0.0f);
@@ -45,7 +45,6 @@ void SkyBox::draw()
             glTexCoord2f(0.0f+i,1.0f);
             glVertex3f(points[i%4][0],            0,points[i%4][1]);
         }
-        tex.unbind();
     glEnd();
 
     glPopMatrix();

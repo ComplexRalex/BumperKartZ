@@ -106,6 +106,8 @@ void Scene::inputReleased(unsigned char key, int x, int y)
 
 void Scene::updateOthers()
 {
+    float safeDistance, distance;
+
     if(player)
     {
         //El kart3 ataca al kart4
@@ -114,13 +116,13 @@ void Scene::updateOthers()
 
     //El kart2 "vigila" una circunferencia y si se acerca
     //una cierta distancia el jugador, ataca
-    float safeDistance = 15.0f;
-    float distance = Util::pointDistance(mx2.getPosX(),
-                                         mx2.getPosY(),
-                                         mx2.getPosZ(),
-                                         mx.getPosX(),
-                                         mx.getPosY(),
-                                         mx.getPosZ());
+    safeDistance = 15.0f;
+    distance = Util::pointDistance(mx2.getPosX(),
+                                     mx2.getPosY(),
+                                     mx2.getPosZ(),
+                                     mx.getPosX(),
+                                     mx.getPosY(),
+                                     mx.getPosZ());
     if(distance - (mx2.getRadious() + mx.getRadious()) < safeDistance)
     {
         karts[1]->attack(karts[0],2);
@@ -372,7 +374,7 @@ void Scene::draw(Carro *kart)
 
     glPushMatrix();
 
-    sky.set(kart->getPosX(),0,kart->getPosZ());
+    sky.set(kart->getPosX(),sky.getY(),kart->getPosZ());
     sky.draw();
 
     muro.draw();

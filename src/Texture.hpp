@@ -7,17 +7,20 @@
 #include <GL/glut.h>
 #endif
 
+#include <iostream>
 #include "RgbImage.hpp"
 /*SE CREA UN OBJETO TEXTURA PARA CADA FIGURA */
 class Texture{
     private:
+        RgbImage* rgbImage;
+        const void* image;
+        long width, height;
         GLuint texture;
     public:
         Texture();
         ~Texture();
-        void loadTexture(char*);    //carga las texturas
-        void bind();    //bindTextures
-        void unbind();  //unbindTextures
+        void loadTexture(std::string);    //carga las texturas
+        void bind();
 };
 
 #endif // TEXTURE_HPP_INCLUDED

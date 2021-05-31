@@ -15,10 +15,10 @@
 
 #include "src/Scene.hpp"
 
-using namespace std;
+#define WIDTH 640
+#define HEIGHT 480
 
-float WIDTH = 1280;
-float HEIGHT = 720;
+using namespace std;
 
 bool fullscreen = false;
 
@@ -43,8 +43,7 @@ void init()
 
 void resize(int width, int height)
 {
-    WIDTH = width; HEIGHT = height;
-    escena.setSize(WIDTH,HEIGHT);
+    escena.setSize(width,height);
 }
 
 void display()
@@ -80,7 +79,7 @@ void SpecialInput(int key, int x, int y)
     {
         case GLUT_KEY_F11:
             if(fullscreen)
-                glutReshapeWindow(1280,720);
+                glutReshapeWindow(HEIGHT,WIDTH);
             else
                 glutFullScreen();
             fullscreen = !fullscreen;
@@ -98,7 +97,7 @@ int main(int argc, char **argv)
     glutInitWindowSize(WIDTH,HEIGHT);
     glutInitWindowPosition(10, 10);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutCreateWindow("Proyecto final: Bumper KartZ");
+    glutCreateWindow("Bumper KartZ");
 
     init();
 

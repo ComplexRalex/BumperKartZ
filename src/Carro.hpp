@@ -33,9 +33,8 @@ class Carro
         float s_magnitude;      // step magnitude
         float r_magnitude;      // rotation magnitude
 
-        char* texFilename[TEXTURE_LIMIT];
-        Texture tex;
-        virtual void initTextures();    // this must be initialized inside derived classes
+        Texture texUp, texDown;
+        virtual void initTextures() = 0;    // this must be initialized inside derived classes
 
         void drawUp();
         void drawBase();

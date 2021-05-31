@@ -41,11 +41,6 @@ Carro::Carro()
 
 Carro::~Carro(){}
 
-void Carro::initTextures()
-{
-    texFilename[0] = "res/default.bmp";
-}
-
 void Carro::drawUp()
 {
     glEnable(GL_TEXTURE_2D);
@@ -54,7 +49,6 @@ void Carro::drawUp()
     glBegin(GL_QUADS);
 
     //front
-        tex.bind();
         glNormal3f(0.0f,0.0f,1.0f);
 
         glTexCoord2f(0.0f,0.0f);
@@ -127,7 +121,6 @@ void Carro::drawUp()
 
         glTexCoord2f(0.0f,1.0f);
         glVertex3f(-0.3f,0.45f,-0.7f);
-        tex.unbind();
     glEnd();
     glPopMatrix();
 
@@ -144,7 +137,6 @@ void Carro::drawBase()
     glBegin(GL_QUADS);
 
     //front
-        tex.bind();
         glNormal3f(0.0f, 0.0f, 1.0f);
 
         glTexCoord2f(0.5f,1.0f);
@@ -203,7 +195,6 @@ void Carro::drawBase()
 
         glTexCoord2f(0.5f,0.0f);
         glVertex3f(-0.5f, -0.15f, 1.0f);
-        tex.unbind();
 	glEnd();
     glPopMatrix();
 
@@ -438,10 +429,10 @@ void Carro::draw()
     glTranslatef(posX,posY,posZ);
     glRotatef(direction-90,0,-1,0);
 
-    tex.loadTexture(texFilename[1]);    // Textura de la base
+    texDown.bind();    // Textura de la base
     drawBase();
 
-    tex.loadTexture(texFilename[0]);    // Textura de la parte superior
+    texUp.bind();    // Textura de la parte superior
     drawUp();
 
     drawBottom();
