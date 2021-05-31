@@ -5,13 +5,13 @@ Scene::Scene():
 {
     karts[0] = &mx;
     karts[1] = &mx2;
-    karts[2] = &mx3;
-    karts[3] = &mx4;
-    karts[4] = &my;
-    karts[5] = &my2;
+    karts[2] = &my;
+    karts[3] = &my2;
 
     for(int i = 0; i < 4; i++)
-        arrows[i] = false;
+        arrowsP1[i] = false;
+    for(int i = 0; i < 4; i++)
+        arrowsP2[i] = false;
 
     start = std::chrono::steady_clock::now();
     angle = 0.0f;
@@ -25,98 +25,140 @@ void Scene::init()
 
     mx.setPositionPoint(0,mx.getPosY(),0);
     mx2.setPositionPoint(30,mx2.getPosY(),12);
-    mx3.setPositionPoint(-30,mx3.getPosY(),20);
-    mx4.setPositionPoint(12,mx4.getPosY(),30);
     my.setPositionPoint(10,my.getPosY(),-30);
     my2.setPositionPoint(30,my2.getPosY(),15);
 
     cam.display();
 }
 
-void Scene::inputPressed(int key, int x, int y)
+void Scene::setSinglePlayer(bool value)
 {
-    switch(key){
-        case GLUT_KEY_UP:
-             arrows[0] = true;
+    player = value;
+}
+
+void Scene::inputPressed(unsigned char key, int x, int y)
+{
+    switch(key)
+    {
+        // Player 1
+        case 'w': case 'W':
+             arrowsP1[0] = true;
              break;
-        case GLUT_KEY_DOWN:
-             arrows[1] = true;
+        case 's': case 'S':
+             arrowsP1[1] = true;
              break;
-        case GLUT_KEY_RIGHT:
-             arrows[2] = true;
+        case 'd': case 'D':
+             arrowsP1[2] = true;
              break;
-        case GLUT_KEY_LEFT:
-             arrows[3] = true;
+        case 'a': case 'A':
+             arrowsP1[3] = true;
+             break;
+
+        // Player 2
+        case 'i': case 'I':
+             arrowsP2[0] = true;
+             break;
+        case 'k': case 'K':
+             arrowsP2[1] = true;
+             break;
+        case 'l': case 'L':
+             arrowsP2[2] = true;
+             break;
+        case 'j': case 'J':
+             arrowsP2[3] = true;
              break;
     }
 }
 
-void Scene::inputReleased(int key, int x, int y)
+void Scene::inputReleased(unsigned char key, int x, int y)
 {
-    switch(key){
-        case GLUT_KEY_UP:
-             arrows[0] = false;
+    switch(key)
+    {
+        // Player 1
+        case 'w': case 'W':
+             arrowsP1[0] = false;
              break;
-        case GLUT_KEY_DOWN:
-             arrows[1] = false;
+        case 's': case 'S':
+             arrowsP1[1] = false;
              break;
-        case GLUT_KEY_RIGHT:
-             arrows[2] = false;
+        case 'd': case 'D':
+             arrowsP1[2] = false;
              break;
-        case GLUT_KEY_LEFT:
-             arrows[3] = false;
+        case 'a': case 'A':
+             arrowsP1[3] = false;
+             break;
+
+        // Player 2
+        case 'i': case 'I':
+             arrowsP2[0] = false;
+             break;
+        case 'k': case 'K':
+             arrowsP2[1] = false;
+             break;
+        case 'l': case 'L':
+             arrowsP2[2] = false;
+             break;
+        case 'j': case 'J':
+             arrowsP2[3] = false;
              break;
     }
 }
 
 void Scene::updateOthers()
 {
-    //El kart2 ataca al kart5
-    karts[1]->attack(karts[4],7);
+    if(player)
+    {
+        //El kart3 ataca al kart4
+        karts[2]->attack(karts[3],7);
+    }
 
-    //El kart3 "vigila" una circunferencia y si se acerca
+    //El kart2 "vigila" una circunferencia y si se acerca
     //una cierta distancia el jugador, ataca
     float safeDistance = 15.0f;
-    float distance = Util::pointDistance(mx3.getPosX(),
-                                         mx3.getPosY(),
-                                         mx3.getPosZ(),
+    float distance = Util::pointDistance(mx2.getPosX(),
+                                         mx2.getPosY(),
+                                         mx2.getPosZ(),
                                          mx.getPosX(),
                                          mx.getPosY(),
                                          mx.getPosZ());
-    if(distance - (mx3.getRadious() + mx.getRadious()) < safeDistance)
+    if(distance - (mx2.getRadious() + mx.getRadious()) < safeDistance)
     {
-        karts[2]->attack(karts[0],2);
+        karts[1]->attack(karts[0],2);
     }
     else
     {
-        mx3.moveRight();
-        mx3.moveRight();
-        mx3.accelerateForward();
+        mx2.moveRight();
+        mx2.moveRight();
+        mx2.accelerateForward();
     }
 
-    //el kart4 ataca al kart6
-    karts[3]->attack(karts[5],4);
-
-    //kart5 y kart2 se atacan entre ellos
-    karts[4]->attack(karts[1],3);
-
-    //el kart 6 ataca al jugador
-    karts[5]->attack(karts[0],5);
+    //el kart4 ataca al kart2
+    karts[3]->attack(karts[1],4);
 }
 
 void Scene::updateMovement()
 {
-    // Update player
-    if(arrows[0] | arrows[1] | arrows[2] | arrows[3])
+    // Update player 1
+    if(arrowsP1[0])
+        mx.accelerateForward();
+    if(arrowsP1[1])
+        mx.accelerateBackward();
+    if(arrowsP1[2])
+        mx.moveRight();
+    if(arrowsP1[3])
+        mx.moveLeft();
+
+    if(!player)
     {
-        if(arrows[0])
-            mx.accelerateForward();
-        if(arrows[1])
-            mx.accelerateBackward();
-        if(arrows[2])
-            mx.moveRight();
-        if(arrows[3])
-            mx.moveLeft();
+        // Update player 2
+        if(arrowsP2[0])
+            my.accelerateForward();
+        if(arrowsP2[1])
+            my.accelerateBackward();
+        if(arrowsP2[2])
+            my.moveRight();
+        if(arrowsP2[3])
+            my.moveLeft();
     }
 
     // NPC movement
@@ -290,18 +332,38 @@ void Scene::handleCollisions()
     }
 }
 
-void Scene::draw()
+void Scene::setFullViewport()
+{
+    glViewport(0, 0, w, h);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(FOVY,(float)w/h,ZNEAR,ZFAR);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+void Scene::setHalfViewport(int w0, int h0)
+{
+    glViewport(w0, h0, w, h/2);
+    glMatrixMode(GL_PROJECTION);
+    glLoadIdentity();
+    gluPerspective(FOVY,(float)w/(h/2),ZNEAR,ZFAR);
+    glMatrixMode(GL_MODELVIEW);
+    glLoadIdentity();
+}
+
+void Scene::draw(Carro *kart)
 {
     glPushMatrix();
 
     glLoadIdentity();
     cam.set(
-        mx.getPosX(),
-        mx.getPosY()+0.75f,
-        mx.getPosZ(),
-        mx.getDirX(),
-        mx.getDirY(),
-        mx.getDirZ(),
+        kart->getPosX(),
+        kart->getPosY()+0.75f,
+        kart->getPosZ(),
+        kart->getDirX(),
+        kart->getDirY(),
+        kart->getDirZ(),
         0.0f,1.0f,0.0f
     );
     cam.display();
@@ -310,7 +372,7 @@ void Scene::draw()
 
     glPushMatrix();
 
-    sky.set(mx.getPosX(),0,mx.getPosZ());
+    sky.set(kart->getPosX(),0,kart->getPosZ());
     sky.draw();
 
     muro.draw();
@@ -330,5 +392,21 @@ void Scene::display()
 {
     updateMovement();
     handleCollisions();
-    draw();
+    if(player)
+    {
+        setFullViewport();
+        draw(&mx);
+    }
+    else
+    {
+        setHalfViewport(0,h/2);
+        draw(&mx);
+        setHalfViewport(0,0);
+        draw(&my);
+    }
+}
+
+void Scene::setSize(int w, int h)
+{
+    this->w = w; this->h = h;
 }

@@ -20,24 +20,9 @@ using namespace std;
 float WIDTH = 1280;
 float HEIGHT = 720;
 
-float FOVY=60.0;
-float ZNEAR=0.01;
-float ZFAR=120.0;
-
 bool fullscreen = false;
 
 Scene escena;
-
-void drawPlane()
-{
-    glBegin(GL_QUADS);
-     glColor3f(0.2f,0.2f,0.2f);
-     glVertex3f( 1.0f, 0.0f,  1.0f);
-     glVertex3f(-1.0f, 0.0f,  1.0f);
-     glVertex3f(-1.0f, 0.0f, -1.0f);
-     glVertex3f( 1.0f, 0.0f, -1.0f);
-    glEnd();
-}
 
 void init()
 {
@@ -51,6 +36,7 @@ void init()
     glEnable(GL_DEPTH_TEST);
 
     escena.init();
+    escena.setSinglePlayer(true);
 
     glutIgnoreKeyRepeat(true);
 }
@@ -58,12 +44,7 @@ void init()
 void resize(int width, int height)
 {
     WIDTH = width; HEIGHT = height;
-    glViewport(0, 0, WIDTH, HEIGHT);
-    glMatrixMode(GL_PROJECTION);
-    glLoadIdentity();
-    gluPerspective(FOVY,(float)WIDTH/HEIGHT,ZNEAR,ZFAR);
-    glMatrixMode(GL_MODELVIEW);
-    glLoadIdentity();
+    escena.setSize(WIDTH,HEIGHT);
 }
 
 void display()
@@ -83,8 +64,14 @@ void KeyboardInput(unsigned char key, int x, int y)
 {
     switch(key)
     {
-        case 27: exit(0);
+        case 27: exit(0); break;
+        default: escena.inputPressed(key,x,y);
     }
+}
+
+void KeyboardUpInput(unsigned char key, int x, int y)
+{
+    escena.inputReleased(key,x,y);
 }
 
 void SpecialInput(int key, int x, int y)
@@ -97,15 +84,12 @@ void SpecialInput(int key, int x, int y)
             else
                 glutFullScreen();
             fullscreen = !fullscreen;
-            break;
-        default:
-            escena.inputPressed(key,x,y);
     }
 }
 
 void SpecialUpInput(int key, int x, int y)
 {
-    escena.inputReleased(key,x,y);
+    return;
 }
 
 int main(int argc, char **argv)
@@ -122,6 +106,7 @@ int main(int argc, char **argv)
     glutDisplayFunc(display);
     glutIdleFunc(display);
     glutKeyboardFunc(KeyboardInput);
+    glutKeyboardUpFunc(KeyboardUpInput);
     glutSpecialFunc(SpecialInput);
     glutSpecialUpFunc(SpecialUpInput);
 
