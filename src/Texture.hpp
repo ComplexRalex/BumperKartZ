@@ -21,6 +21,7 @@ class Texture{
         ~Texture();
         void loadTexture(std::string);    //carga las texturas
         void bind();
+        void unbind();
 };
 
 #endif // TEXTURE_HPP_INCLUDED

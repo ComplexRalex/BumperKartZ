@@ -36,7 +36,7 @@ void init()
     glEnable(GL_DEPTH_TEST);
 
     escena.init();
-    escena.setSinglePlayer(true);
+    escena.setSinglePlayer(false);
 
     glutIgnoreKeyRepeat(true);
 }
@@ -79,7 +79,7 @@ void SpecialInput(int key, int x, int y)
     {
         case GLUT_KEY_F11:
             if(fullscreen)
-                glutReshapeWindow(HEIGHT,WIDTH);
+                glutReshapeWindow(WIDTH,HEIGHT);
             else
                 glutFullScreen();
             fullscreen = !fullscreen;

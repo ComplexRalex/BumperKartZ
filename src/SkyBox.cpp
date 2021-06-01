@@ -50,4 +50,6 @@ void SkyBox::draw()
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
     glDepthMask(GL_TRUE);
+
+    tex.unbind();
 }

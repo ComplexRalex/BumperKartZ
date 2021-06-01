@@ -283,7 +283,8 @@ void Carro::drawBottom()
         glVertex3f(-0.5f,-0.15f,-1.0f);
         glColor3f(0.8f,0.8f,0.8f);
         glVertex3f(-0.5f,-0.20f,-1.5f);
-        glColor3f(0.8f,0.8f,0.8f);        glVertex3f(-0.5f,-0.20f,1.5f);
+        glColor3f(0.8f,0.8f,0.8f);
+        glVertex3f(-0.5f,-0.20f,1.5f);
         glColor3f(0.4f,0.4f,0.4f);
         glVertex3f(-0.5f,-0.15f,1.0f);
         //middle
@@ -431,9 +432,11 @@ void Carro::draw()
 
     texDown.bind();    // Textura de la base
     drawBase();
+    texDown.unbind();
 
     texUp.bind();    // Textura de la parte superior
     drawUp();
+    texUp.unbind();
 
     drawBottom();
 

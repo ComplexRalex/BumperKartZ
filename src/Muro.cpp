@@ -42,4 +42,6 @@ void Muro::draw()
     glEnd();
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
+
+    tex.unbind();
 }

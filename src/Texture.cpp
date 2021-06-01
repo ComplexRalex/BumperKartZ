@@ -1,21 +1,16 @@
 #include "Texture.hpp"
 
-
 Texture::Texture(){}
 
 Texture::~Texture()
 {
-    glDeleteTextures(1,&texture);
     rgbImage->Reset();
-
     delete rgbImage;
 }
 
 void Texture::loadTexture(std::string filename)
 {
     rgbImage = new RgbImage(filename.c_str());
-
-    std::cout << "Image loaded? " << (rgbImage->ImageLoaded()?"true":"false") << "\n";
 
     image = rgbImage->ImageData();
     width = rgbImage->GetNumCols();
@@ -38,4 +33,10 @@ void Texture::bind()
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 
 	gluBuild2DMipmaps(GL_TEXTURE_2D, 3, width, height, GL_RGB, GL_UNSIGNED_BYTE, image);
+}
+
+void Texture::unbind()
+{
+    glBindTexture(GL_TEXTURE_2D,0);
+    glDeleteTextures(1,&texture);
 }

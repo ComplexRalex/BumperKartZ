@@ -42,4 +42,6 @@ void Piso::draw()
 
     glPopMatrix();
     glDisable(GL_TEXTURE_2D);
+
+    tex.unbind();
 }
