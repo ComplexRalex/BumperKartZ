@@ -1,5 +1,5 @@
-#ifndef CARRO_HPP_INCLUDED
-#define CARRO_HPP_INCLUDED
+#ifndef KART_HPP_INCLUDED
+#define KART_HPP_INCLUDED
 
 #ifdef __APPLE__
 #include <GLUT/glut.h>
@@ -15,7 +15,7 @@
 
 #define TEXTURE_LIMIT 4
 
-class Carro
+class Kart
 {
     protected:
         static std::chrono::steady_clock::time_point start;
@@ -43,9 +43,9 @@ class Carro
         void updateDirectionAngle();
         void updateDirection();
     public:
-        Carro(float,float,float,float,float,float,float,float);
-        Carro();
-        ~Carro();
+        Kart(float,float,float,float,float,float,float,float);
+        Kart();
+        ~Kart();
 
         int getID();
         static void setTimer(std::chrono::steady_clock::time_point);
@@ -88,9 +88,9 @@ class Carro
         virtual void accelerateBackward();  // Función especial para mover al objeto
         virtual void moveRight();           // Función especial para mover al objeto
         virtual void moveLeft();            // Función especial para mover al objeto
-        virtual void attack(Carro*,int);    // Función que ataca al objetivo
+        virtual void attack(Kart*,int);    // Función que ataca al objetivo
 
         // Maybe some "actions", for instante, "explode" or something XD
 };
 
-#endif // CARRO_HPP_INCLUDED
+#endif // KART_HPP_INCLUDED

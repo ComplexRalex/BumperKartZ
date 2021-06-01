@@ -1,5 +1,5 @@
-#ifndef CAMARA_HPP
-#define CAMARA_HPP
+#ifndef CAMERA_HPP
+#define CAMERA_HPP
 #define PI_ 3.14159f
 
 #include <math.h>
@@ -7,7 +7,7 @@
 #include "../util/Utilities.hpp"
 
 
-class Camara
+class Camera
 {
     private:
         float eyeX, eyeY, eyeZ;
@@ -20,9 +20,9 @@ class Camara
         void updateCenter();
         void specialUpdateCenter();
     public:
-        Camara(float, float, float, float, float, float, float, float, float, float, float);
-        Camara();
-        ~Camara();
+        Camera(float, float, float, float, float, float, float, float, float, float, float);
+        Camera();
+        ~Camera();
 
         void set(float, float, float, float, float, float, float, float, float);
         void setEyeX(float);
@@ -59,4 +59,4 @@ class Camara
         void display();
 };
 
-#endif // CAMARA_HPP
+#endif // CAMERA_HPP

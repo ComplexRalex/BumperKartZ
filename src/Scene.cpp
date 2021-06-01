@@ -21,7 +21,7 @@ Scene::~Scene(){}
 
 void Scene::init()
 {
-    Carro::setTimer(start);
+    Kart::setTimer(start);
 
     mx.setPositionPoint(0,mx.getPosY(),0);
     mx2.setPositionPoint(30,mx2.getPosY(),12);
@@ -200,16 +200,16 @@ void Scene::handleCollisions()
 {
     // Handle static collisions
 
-    Carro* current;
-    Carro* target;
+    Kart* current;
+    Kart* target;
 
     float distance;
     float overlap, overlapX, overlapZ;
 
     float nx, nz, kx, kz, momentum;
 
-    std::vector<std::pair<Carro*,Carro*>> parDeColision;
-    std::vector<Carro*> colisionConMuro;
+    std::vector<std::pair<Kart*,Kart*>> parDeColision;
+    std::vector<Kart*> colisionConMuro;
 
     for(int i = 0; i < NUM_KARTS; i++)
     {
@@ -354,7 +354,7 @@ void Scene::setHalfViewport(int w0, int h0)
     glLoadIdentity();
 }
 
-void Scene::draw(Carro *kart)
+void Scene::draw(Kart *kart)
 {
     glPushMatrix();
 

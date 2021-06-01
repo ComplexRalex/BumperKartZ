@@ -1,6 +1,6 @@
-#include "Muro.hpp"
+#include "Wall.hpp"
 
-Muro::Muro()
+Wall::Wall()
 {
     float step = (float) 360.0f / (float) WALL_RES;
     x = y = z = 0.0f;
@@ -15,14 +15,14 @@ Muro::Muro()
     }
 }
 
-Muro::~Muro(){}
+Wall::~Wall(){}
 
-float Muro::getX(){return x;}
-float Muro::getY(){return y;}
-float Muro::getZ(){return z;}
-float Muro::getRadious(){ return WALL_RAD; }
+float Wall::getX(){return x;}
+float Wall::getY(){return y;}
+float Wall::getZ(){return z;}
+float Wall::getRadious(){ return WALL_RAD; }
 
-void Muro::draw()
+void Wall::draw()
 {
     float delta = (float) WALL_TIMES / (float) WALL_RES;
     tex.bind();

@@ -10,11 +10,11 @@
 
 #include "../util/Utilities.hpp"
 #include "SkyBox.hpp"
-#include "Camara.hpp"
-#include "Carro.hpp"
+#include "Camera.hpp"
+#include "Kart.hpp"
 #include "Model.hpp"
-#include "Muro.hpp"
-#include "Piso.hpp"
+#include "Wall.hpp"
+#include "Ground.hpp"
 
 #define NUM_KARTS 4
 
@@ -30,12 +30,12 @@ class Scene
         int w, h;
         float angle;
         SkyBox sky;
-        Camara cam;
+        Camera cam;
         ModelX mx,mx2;
         ModelY my,my2;
-        Carro *karts[NUM_KARTS];
-        Muro muro;
-        Piso piso;
+        Kart *karts[NUM_KARTS];
+        Wall muro;
+        Ground piso;
 
         bool arrowsP1[4];
         bool arrowsP2[4];
@@ -46,7 +46,7 @@ class Scene
         void handleCollisions();
         void setFullViewport();
         void setHalfViewport(int,int);
-        void draw(Carro*);
+        void draw(Kart*);
     public:
         Scene();
         ~Scene();

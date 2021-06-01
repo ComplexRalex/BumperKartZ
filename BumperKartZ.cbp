@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/ProyectoFinal_Graficacion" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/BumperKartZ" prefix_auto="1" extension_auto="1" />
 				<Option working_dir=".a" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
@@ -17,7 +17,7 @@
 				</Compiler>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/ProyectoFinal_Graficacion" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/BumperKartZ" prefix_auto="1" extension_auto="1" />
 				<Option working_dir="C:/Program Files/CodeBlocks/MinGW/bin" />
 				<Option object_output="obj/Release/" />
 				<Option type="0" />
@@ -43,16 +43,14 @@
 			<Add directory="C:/Program Files/CodeBlocks/MinGW/lib" />
 		</Linker>
 		<Unit filename="main.cpp" />
-		<Unit filename="src/Camara.cpp" />
-		<Unit filename="src/Camara.hpp" />
-		<Unit filename="src/Carro.cpp" />
-		<Unit filename="src/Carro.hpp" />
+		<Unit filename="src/Camera.cpp" />
+		<Unit filename="src/Camera.hpp" />
+		<Unit filename="src/Ground.cpp" />
+		<Unit filename="src/Ground.hpp" />
+		<Unit filename="src/Kart.cpp" />
+		<Unit filename="src/Kart.hpp" />
 		<Unit filename="src/Model.cpp" />
 		<Unit filename="src/Model.hpp" />
-		<Unit filename="src/Muro.cpp" />
-		<Unit filename="src/Muro.hpp" />
-		<Unit filename="src/Piso.cpp" />
-		<Unit filename="src/Piso.hpp" />
 		<Unit filename="src/RgbImage.cpp" />
 		<Unit filename="src/RgbImage.hpp" />
 		<Unit filename="src/Scene.cpp" />
@@ -61,6 +59,8 @@
 		<Unit filename="src/SkyBox.hpp" />
 		<Unit filename="src/Texture.cpp" />
 		<Unit filename="src/Texture.hpp" />
+		<Unit filename="src/Wall.cpp" />
+		<Unit filename="src/Wall.hpp" />
 		<Unit filename="util/Utilities.cpp" />
 		<Unit filename="util/Utilities.hpp" />
 		<Extensions>

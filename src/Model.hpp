@@ -1,9 +1,10 @@
 #ifndef MODEL_HPP_INCLUDED
 #define MODEL_HPP_INCLUDED
 
-#include "Carro.hpp"
+#include "Kart.hpp"
 #include "Texture.hpp"
-class ModelX:public Carro
+
+class ModelX: public Kart
 {
     private:
         void initTextures();
@@ -11,7 +12,7 @@ class ModelX:public Carro
         ModelX();
         ~ModelX();
 };
-class ModelY:public Carro
+class ModelY: public Kart
 {
     private:
         void initTextures();

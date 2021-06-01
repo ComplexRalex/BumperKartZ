@@ -1,5 +1,5 @@
-#ifndef MURO_HPP_INCLUDED
-#define MURO_HPP_INCLUDED
+#ifndef WALL_HPP_INCLUDED
+#define WALL_HPP_INCLUDED
 
 #include "GL/glut.h"
 #include "Texture.hpp"
@@ -11,7 +11,7 @@
 #define WALL_RAD 50.0f
 #define WALL_TIMES 3
 
-class Muro
+class Wall
 {
     private:
         float x,y,z;
@@ -20,8 +20,8 @@ class Muro
         char* texFilename;
         Texture tex;
     public:
-        Muro();
-        ~Muro();
+        Wall();
+        ~Wall();
 
         float getX();
         float getY();
@@ -31,4 +31,4 @@ class Muro
         void draw();
 };
 
-#endif // MURO_HPP_INCLUDED
+#endif // WALL_HPP_INCLUDED

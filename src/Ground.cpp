@@ -1,6 +1,6 @@
-#include "Piso.hpp"
+#include "Ground.hpp"
 
-Piso::Piso()
+Ground::Ground()
 {
     x = y = z = 0.0f;
 
@@ -12,14 +12,14 @@ Piso::Piso()
     points[3][0] = -FLOOR_RAD; points[3][1] =  FLOOR_RAD;
 }
 
-Piso::~Piso(){}
+Ground::~Ground(){}
 
-float Piso::getX(){return x;}
-float Piso::getY(){return y;}
-float Piso::getZ(){return z;}
-float Piso::getRadious(){ return FLOOR_RAD; }
+float Ground::getX(){return x;}
+float Ground::getY(){return y;}
+float Ground::getZ(){return z;}
+float Ground::getRadious(){ return FLOOR_RAD; }
 
-void Piso::draw()
+void Ground::draw()
 {
     tex.bind();
 

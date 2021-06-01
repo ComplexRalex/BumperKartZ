@@ -1,5 +1,5 @@
-#ifndef PISO_HPP_INCLUDED
-#define PISO_HPP_INCLUDED
+#ifndef GROUND_HPP_INCLUDED
+#define GROUND_HPP_INCLUDED
 
 #include "GL/glut.h"
 #include "Texture.hpp"
@@ -7,7 +7,7 @@
 #define FLOOR_RAD 50.0f
 #define FLOOR_REPEAT 5
 
-class Piso
+class Ground
 {
     private:
         float x,y,z;
@@ -16,8 +16,8 @@ class Piso
         char* texFilename;
         Texture tex;
     public:
-        Piso();
-        ~Piso();
+        Ground();
+        ~Ground();
 
         float getX();
         float getY();
@@ -27,4 +27,4 @@ class Piso
         void draw();
 };
 
-#endif // PISO_HPP_INCLUDED
+#endif // GROUND_HPP_INCLUDED

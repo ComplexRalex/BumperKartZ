@@ -1,6 +1,6 @@
-#include "Camara.hpp"
+#include "Camera.hpp"
 
-Camara::Camara( float eyeX, float eyeY, float eyeZ,
+Camera::Camera( float eyeX, float eyeY, float eyeZ,
                 float dirX, float dirY, float dirZ,
                 float upX, float upY, float upZ,
                 float step, float rots)
@@ -10,23 +10,23 @@ Camara::Camara( float eyeX, float eyeY, float eyeZ,
     r_magnitude = rots;
 }
 
-Camara::Camara()
+Camera::Camera()
 {
     set(0.0f,0.0f,0.0f,0.0f,0.0f,1.0f,0.0f,1.0f,0.0f);
     s_magnitude = r_magnitude = 1.0f;
 }
 
-Camara::~Camara(){}
+Camera::~Camera(){}
 
 //intuitive formula as seen in class
-void Camara::updateCenter()
+void Camera::updateCenter()
 {
     centerX = eyeX + dirX;
     centerY = eyeY + dirY;
     centerZ = eyeZ + dirZ;
 }
 
-void Camara::specialUpdateCenter()
+void Camera::specialUpdateCenter()
 {
     float rads = Util::degToRad(theta);
     //std::cout << theta << std::endl;
@@ -38,7 +38,7 @@ void Camara::specialUpdateCenter()
     centerZ = eyeZ + dirZ;
 }
 
-void Camara::set(float eyeX, float eyeY, float eyeZ,
+void Camera::set(float eyeX, float eyeY, float eyeZ,
                  float dirX, float dirY, float dirZ,
                  float upX, float upY, float upZ)
 {
@@ -55,25 +55,25 @@ void Camara::set(float eyeX, float eyeY, float eyeZ,
 I think that the center has to update every time we
 update the eye, but just for the specified axis.
 */
-void Camara::setEyeX(float eyeX)
+void Camera::setEyeX(float eyeX)
 {
     this->eyeX = eyeX;
     centerX = eyeX + dirX;
 }
 
-void Camara::setEyeY(float eyeY)
+void Camera::setEyeY(float eyeY)
 {
     this->eyeY = eyeY;
     centerY = eyeY + dirY;
 }
 
-void Camara::setEyeZ(float eyeZ)
+void Camera::setEyeZ(float eyeZ)
 {
     this->eyeZ = eyeZ;
     centerY = eyeZ + dirZ;
 }
 
-void Camara::setEye(float eyeX, float eyeY, float eyeZ)
+void Camera::setEye(float eyeX, float eyeY, float eyeZ)
 {
     this->eyeX = eyeX; this->eyeY = eyeY; this->eyeZ = eyeZ;
     updateCenter();
@@ -84,56 +84,56 @@ If the direction is updated, then the center must also be updated to make
 it look like we're heading towards that specific direction. I think that
 the center must only be updated to the specified axis.
 */
-void Camara::setDirX(float dirX)
+void Camera::setDirX(float dirX)
 {
     this->dirX = dirX;
     centerX = eyeX + dirX;
 }
 
-void Camara::setDirY(float dirY)
+void Camera::setDirY(float dirY)
 {
     this->dirY = dirY;
     centerY = eyeY + dirY;
 }
 
-void Camara::setDirZ(float dirZ)
+void Camera::setDirZ(float dirZ)
 {
     this->dirZ = dirZ;
     centerZ = eyeZ + dirZ;
 }
 
-void Camara::setDir(float dirX, float dirY, float dirZ)
+void Camera::setDir(float dirX, float dirY, float dirZ)
 {
     this->dirX = dirX; this->dirY = dirY; this->dirZ = dirZ;
     updateCenter();
 }
 
-void Camara::setStepMagnitude(float m)
+void Camera::setStepMagnitude(float m)
 {
     s_magnitude = m;
 }
 
-void Camara::setRotMagnitude(float m)
+void Camera::setRotMagnitude(float m)
 {
     r_magnitude = m;
 }
 
-float Camara::getEyeX(){return eyeX;}
-float Camara::getEyeY(){return eyeY;}
-float Camara::getEyeZ(){return eyeZ;}
+float Camera::getEyeX(){return eyeX;}
+float Camera::getEyeY(){return eyeY;}
+float Camera::getEyeZ(){return eyeZ;}
 
-float Camara::getCenterX(){return centerX;}
-float Camara::getCenterY(){return centerY;}
-float Camara::getCenterZ(){return centerZ;}
+float Camera::getCenterX(){return centerX;}
+float Camera::getCenterY(){return centerY;}
+float Camera::getCenterZ(){return centerZ;}
 
-float Camara::getDirX(){return dirX;}
-float Camara::getDirY(){return dirY;}
-float Camara::getDirZ(){return dirZ;}
+float Camera::getDirX(){return dirX;}
+float Camera::getDirY(){return dirY;}
+float Camera::getDirZ(){return dirZ;}
 
-float Camara::getStepMagnitude(){return s_magnitude;}
-float Camara::getRotMagnitude(){return r_magnitude;}
+float Camera::getStepMagnitude(){return s_magnitude;}
+float Camera::getRotMagnitude(){return r_magnitude;}
 
-void Camara::moveForward()
+void Camera::moveForward()
 {
     eyeX += (s_magnitude * dirX);
     eyeY += (s_magnitude * dirY);
@@ -141,7 +141,7 @@ void Camara::moveForward()
     updateCenter();
 }
 
-void Camara::moveBackward()
+void Camera::moveBackward()
 {
     eyeX -= (s_magnitude * dirX);
     eyeY -= (s_magnitude * dirY);
@@ -149,7 +149,7 @@ void Camara::moveBackward()
     updateCenter();
 }
 
-void Camara::moveLeft()
+void Camera::moveLeft()
 {
     theta -= r_magnitude;
     //std::cout << theta << std::endl;
@@ -157,7 +157,7 @@ void Camara::moveLeft()
     specialUpdateCenter();
 }
 
-void Camara::moveRight()
+void Camera::moveRight()
 {
     theta += r_magnitude;
     //std::cout << theta << std::endl;
@@ -165,7 +165,7 @@ void Camara::moveRight()
     specialUpdateCenter();
 }
 
-void Camara::display()
+void Camera::display()
 {
     gluLookAt(eyeX,eyeY,eyeZ,centerX,centerY,centerZ,upX,upY,upZ);
 }

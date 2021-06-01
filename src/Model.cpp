@@ -1,6 +1,6 @@
 #include "Model.hpp"
 
-ModelX::ModelX():Carro()
+ModelX::ModelX():Kart()
 {
     initTextures();
 }
@@ -13,7 +13,7 @@ void ModelX::initTextures()
 }
 
 //Model Y
-ModelY::ModelY():Carro()
+ModelY::ModelY():Kart()
 {
     initTextures();
 }
